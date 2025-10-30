@@ -1,0 +1,74 @@
+=== VBA Red Team Testing Framework Guide ===
+
+[STEP 1: IMPORT ALL MODULES]
+1. Open Microsoft Word
+2. Press ALT + F11 to open VBA Editor
+3. In left "Project" window, right-click "Normal"
+4. Select "Import File"
+5. Import these FIVE .bas files:
+   - C2MainModule.bas      (核心C2功能)
+   - UtilityFunctions.bas   (系統工具函數)
+   - ObfuscationTechniques.bas (混淆反檢測技術)
+   - AutoExecModule.bas     (自動執行持久化)
+   - StartupModule.bas      (文檔啟動執行)
+
+[STEP 2: 測試方法]
+1. 在VBA編輯器中按 Ctrl + G 打開「即時運算視窗」
+2. 輸入測試命令或直接保存並重新打開Word文檔
+
+[手動測試命令]
+' --- C2主要功能 ---
+InitializeC2Connection     - 初始化C2連接
+EstablishEdgeC2           - 建立Edge瀏覽器C2通道
+ExecuteCommand("whoami")   - 執行系統命令
+
+' --- 系統工具 ---
+GetFullSystemInfo()       - 獲取完整系統信息
+GetRunningProcesses()     - 獲取運行進程列表
+GetNetworkConnections()   - 獲取網絡連接信息
+
+' --- 混淆技術 ---
+MainObfuscated            - 執行混淆主程序
+ObfuscateString("test")   - 字符串混淆測試
+IsDebuggerPresent()       - 調試器檢測
+IsSandbox()              - 沙箱環境檢測
+
+' --- 環境檢測 ---
+IsSafeEnvironment()       - 安全環境檢查 (AutoExecModule)
+IsEnvironmentSafe()       - 環境安全檢查 (StartupModule)
+
+[自動執行測試]
+1. 保存Word文檔為 .docm 格式
+2. 關閉並重新打開文檔
+3. AutoExecModule和StartupModule會自動執行:
+   - AutoOpen() / Document_Open() - 文檔打開時執行
+   - AutoExec() - Word啟動時執行
+   - 自動進行環境檢測和C2通信
+
+[測試模塊功能]
+TestAllFunctions     - 完整功能測試
+TestSystemInfo       - 系統信息測試
+TestCommandExecution - 命令執行測試
+TestObfuscation      - 混淆技術測試
+TestEdgeC2           - C2功能測試
+TestFileOperations   - 文件操作測試
+TestNetworkFunctions - 網絡功能測試
+
+[Example Output]
+After typing SimpleTest(), you should see output like:
+=== Simple Test Started ===
+User: YourUsername
+Computer: YourComputerName
+Current User: domain\username
+Hostname: COMPUTER01
+=== Simple Test Completed ===
+
+[Common Issues]
+1. If "Compile Error" appears, ensure all .bas files imported correctly
+2. If command doesn't respond, check if typing in Immediate Window
+3. Ensure macro security settings allow macro execution
+
+[Security Reminder]
+⚠️ Use only in authorized testing environments
+⚠️ Clean up system after testing
+⚠️ Follow organizational security policies
